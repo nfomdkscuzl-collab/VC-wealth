@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+<title>VC的首富养成记</title>
+
+<!-- iOS "添加到主屏幕" 支持：以下三行让网页在 iPhone 桌面上表现得像原生 App -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="首富养成记">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<meta name="theme-color" content="#F3FAF6">
+<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22VC%E7%9A%84%E9%A6%96%E5%AF%8C%E5%85%BB%E6%88%90%E8%AE%B0%22,%22short_name%22:%22%E9%A6%96%E5%AF%8C%E5%85%BB%E6%88%90%22,%22display%22:%22standalone%22,%22background_color%22:%22%23F3FAF6%22,%22theme_color%22:%22%23F3FAF6%22}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5FBF8; --bg2:#FFFFFF; --card:#FFFFFF; --card2:#F0F9F4;
+  --green:#45B37E; --green-deep:#2E9463; --green-light:#B9EBCD;
+  --income:#3AA876; --expense:#E2726B;
+  --text:#22332A; --text2:rgba(34,51,42,.58); --text3:rgba(34,51,42,.38);
+  --divider:rgba(34,51,42,.09);
+  --on-accent:#FFFFFF;
+  --card-shadow:0 2px 14px rgba(34,74,52,.07);
+  --radius:20px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%; overscroll-behavior-y:none;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex; justify-content:center;
+}
+.num{font-family:"Manrope",-apple-system,sans-serif;}
+#app{
+  width:100%; max-width:520px; min-height:100vh;
+  display:flex; flex-direction:column; position:relative;
+  background:var(--bg);
+}
+#view{flex:1; padding:calc(var(--safe-top) + 14px) 16px 100px; overflow-y:auto;}
+.hidden{display:none !important;}
+
+/* ---------- 卡片通用 ---------- */
+.card{background:var(--card); border-radius:var(--radius); padding:16px; margin-bottom:14px; box-shadow:var(--card-shadow); border:1px solid rgba(34,51,42,.04);}
+.hero-card{
+  background:linear-gradient(135deg,#EAF8EF,#CDEFDA);
+  color:var(--text); border-radius:var(--radius); padding:18px; margin-bottom:14px;
+  border:1px solid rgba(69,179,126,.16);
+}
+.section-title{font-size:14px; font-weight:700; margin:0 0 12px; color:var(--text);}
+.muted{color:var(--text2); font-size:12px;}
+
+/* ---------- 顶部 header ---------- */
+.header{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+.header h1{font-size:19px; font-weight:800; margin:0;}
+.header p{margin:2px 0 0; font-size:11.5px; color:var(--text2);}
+.crown{font-size:22px;}
+
+/* ---------- 财富进度卡 ---------- */
+.wealth-top{display:flex; justify-content:space-between; align-items:flex-start;}
+.wealth-title{font-size:11px; opacity:.6; margin-bottom:4px;}
+.wealth-name{font-size:21px; font-weight:800; display:flex; align-items:center; gap:6px;}
+.wealth-net{font-size:17px; font-weight:800; text-align:right;}
+.bar-track{background:rgba(34,51,42,.12); border-radius:6px; height:10px; margin-top:14px; overflow:hidden;}
+.bar-fill{background:var(--green-deep); height:100%; border-radius:6px; transition:width .4s;}
+.wealth-hint{font-size:11px; opacity:.65; margin-top:7px;}
+
+/* ---------- 月度总览 ---------- */
+.month-switch{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+.month-switch button{background:none; border:none; color:var(--text2); font-size:18px; padding:6px 10px;}
+.month-switch .m-title{font-size:15px; font-weight:700;}
+.summary-row{display:flex;}
+.summary-col{flex:1; text-align:center; padding:0 4px;}
+.summary-col + .summary-col{border-left:1px solid var(--divider);}
+.summary-label{font-size:11.5px; color:var(--text2); margin-bottom:6px;}
+.summary-value{font-size:15px; font-weight:800;}
+
+/* ---------- 分类条形图 ---------- */
+.bar-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+.bar-row .name{width:64px; font-size:12px; color:var(--text2); flex-shrink:0;}
+.bar-row .track{flex:1; height:10px; background:rgba(34,51,42,.07); border-radius:5px; overflow:hidden;}
+.bar-row .fill{height:100%; border-radius:5px;}
+.bar-row .amt{width:64px; text-align:right; font-size:12px; font-weight:700; flex-shrink:0;}
+
+/* ---------- 流水行 ---------- */
+.tx-row{display:flex; align-items:center; gap:12px; padding:9px 0;}
+.tx-row + .tx-row{border-top:1px solid var(--divider);}
+.tx-icon{width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;}
+.tx-mid{flex:1; min-width:0;}
+.tx-name{font-size:13.5px; font-weight:600;}
+.tx-note{font-size:11.5px; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.tx-amt{font-size:14.5px; font-weight:800; flex-shrink:0;}
+.empty-tip{text-align:center; color:var(--text2); font-size:13px; padding:34px 0;}
+
+/* ---------- Tab Bar ---------- */
+.tabbar{
+  position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+  width:100%; max-width:520px;
+  background:var(--bg2); border-top-left-radius:26px; border-top-right-radius:26px;
+  display:flex; align-items:flex-end; padding:10px 6px calc(14px + var(--safe-bottom));
+  box-shadow:0 -2px 16px rgba(34,74,52,.08);
+}
+.tab-btn{flex:1; background:none; border:none; color:var(--text3); display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; font-size:10.5px;}
+.tab-btn.active{color:var(--green-deep);}
+.tab-btn .ic{font-size:19px;}
+.tab-add{flex:1; display:flex; justify-content:center;}
+.tab-add button{
+  width:54px; height:54px; border-radius:50%; border:none;
+  background:linear-gradient(135deg,var(--green),var(--green-deep));
+  color:var(--on-accent); font-size:26px; font-weight:800; margin-top:-20px;
+  box-shadow:0 8px 18px rgba(69,179,126,.35);
+}
+
+/* ---------- Modal / Sheet ---------- */
+.sheet-mask{position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:40; display:flex; align-items:flex-end; justify-content:center;}
+.sheet{
+  width:100%; max-width:520px; max-height:92vh; overflow-y:auto;
+  background:var(--bg); border-top-left-radius:24px; border-top-right-radius:24px;
+  padding:14px 18px calc(24px + var(--safe-bottom));
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%);} to{transform:translateY(0);}}
+.sheet-head{display:flex; align-items:center; justify-content:space-between; padding:6px 0 14px;}
+.sheet-head .title{font-size:15.5px; font-weight:800;}
+.sheet-head button{background:none; border:none; color:var(--text2); font-size:14px; padding:6px;}
+.sheet-head button.primary{color:var(--green-deep); font-weight:800;}
+
+/* ---------- 记账弹窗 ---------- */
+.type-switch{display:flex; gap:8px; margin-bottom:14px;}
+.type-switch button{flex:1; padding:9px; border-radius:11px; border:1px solid var(--divider); font-size:13.5px; font-weight:700; background:var(--card); color:var(--text2);}
+.type-switch button.active.expense{background:var(--expense); color:#fff;}
+.type-switch button.active.income{background:var(--income); color:var(--on-accent);}
+.amount-input{display:flex; align-items:center; gap:8px; padding:6px 0 16px;}
+.amount-input span{font-size:26px; font-weight:700; color:var(--text2);}
+.amount-input input{flex:1; border:none; background:none; color:var(--text); font-size:34px; font-weight:800; font-family:"Manrope",sans-serif; outline:none;}
+.cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px 8px; margin-top:6px;}
+.cat-cell{display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:none;}
+.cat-circle{width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:21px;}
+.cat-cell.small .cat-circle{width:42px; height:42px; font-size:18px;}
+.cat-cell span{font-size:11px; color:var(--text2); max-width:60px; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.cat-cell.selected span{color:var(--text); font-weight:700;}
+.note-input{width:100%; margin-top:14px; padding:12px; border-radius:12px; border:1px solid var(--divider); background:var(--card); color:var(--text); font-size:13.5px; outline:none;}
+.note-input::placeholder{color:var(--text3);}
+.save-btn{width:100%; margin-top:18px; padding:14px; border:1px solid var(--divider); border-radius:14px; font-size:15px; font-weight:800; background:var(--card); color:var(--text3);}
+.save-btn.ready{background:linear-gradient(135deg,var(--green),var(--green-deep)); color:var(--on-accent); border:none;}
+
+/* ---------- 表单通用 ---------- */
+.form-item{margin-bottom:16px;}
+.form-item label{display:block; font-size:12px; color:var(--text2); margin-bottom:7px;}
+.form-item input, .form-item textarea{
+  width:100%; padding:11px 12px; border-radius:11px; border:1px solid var(--divider); background:var(--card);
+  color:var(--text); font-size:14px; outline:none;
+}
+.chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+.chip{padding:6px 12px; border-radius:20px; background:var(--card); color:var(--text2); font-size:12px; border:1px solid var(--divider);}
+.chip.active{background:var(--green); color:var(--on-accent); font-weight:700; border-color:var(--green);}
+.swatch{width:30px; height:30px; border-radius:50%; border:2px solid transparent;}
+.swatch.active{border-color:var(--text);}
+.icon-opt{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; background:var(--card); border:1px solid var(--divider);}
+.icon-opt.active{background:var(--green-light); border-color:var(--green);}
+
+/* ---------- 账单页 ---------- */
+.filter-scroll{display:flex; gap:8px; overflow-x:auto; padding-bottom:12px; margin-bottom:2px;}
+.filter-scroll::-webkit-scrollbar{display:none;}
+.day-group{margin-bottom:6px;}
+.day-head{display:flex; justify-content:space-between; font-size:11.5px; color:var(--text2); padding:10px 2px 4px;}
+.day-head .in{color:var(--income); margin-right:8px;}
+.day-head .out{color:var(--expense);}
+
+/* ---------- 分类管理 ---------- */
+.cat-manage-group{margin-bottom:16px;}
+.cat-manage-title{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700; margin-bottom:10px;}
+.cat-manage-subs{display:flex; flex-wrap:wrap; gap:8px;}
+.sub-chip{display:flex; align-items:center; gap:6px; background:var(--card); padding:7px 10px 7px 8px; border-radius:20px; font-size:12.5px; border:1px solid var(--divider);}
+.sub-chip button{background:none; border:none; color:var(--text3); font-size:13px; padding:0 0 0 4px;}
+.add-sub-chip{background:none; border:1.5px dashed var(--divider); color:var(--text2);}
+
+/* ---------- 存款 ---------- */
+.account-row{display:flex; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:13px; margin-bottom:10px; box-shadow:var(--card-shadow); border:1px solid rgba(34,51,42,.04);}
+.account-icon{width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;}
+.account-mid{flex:1; min-width:0;}
+.account-name{font-size:13.5px; font-weight:700; margin-bottom:5px;}
+.mini-progress{height:5px; width:110px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden;}
+.mini-progress .fill{height:100%; border-radius:3px;}
+.account-balance{font-size:14.5px; font-weight:800;}
+
+/* ---------- 养成/我的 ---------- */
+.level-header{text-align:center; padding:26px 0;}
+.level-header .ic{font-size:38px;}
+.level-header .name{font-size:21px; font-weight:800; margin:8px 0 4px;}
+.badge-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+.badge{display:flex; flex-direction:column; align-items:center; gap:6px;}
+.badge-circle{width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--card2); color:var(--text3); border:1px solid var(--divider);}
+.badge-circle.unlocked{background:linear-gradient(135deg,var(--green),var(--green-deep)); color:var(--on-accent); border:none;}
+.badge span{font-size:10.5px; color:var(--text2); text-align:center;}
+.badge.unlocked span{color:var(--text); font-weight:600;}
+.settings-row{display:flex; align-items:center; gap:12px; padding:14px 2px; font-size:13.5px;}
+.settings-row + .settings-row{border-top:1px solid var(--divider);}
+.settings-row .arrow{margin-left:auto; color:var(--text3);}
+
+/* ---------- 引导页 ---------- */
+.guide-step{display:flex; gap:12px; background:var(--card); border-radius:14px; padding:13px; margin-bottom:12px; border:1px solid var(--divider);}
+.guide-num{width:24px; height:24px; border-radius:50%; background:var(--green); color:var(--on-accent); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.guide-step b{font-size:13.5px; display:block; margin-bottom:3px;}
+.guide-step p{margin:0; font-size:12px; color:var(--text2); line-height:1.5;}
+
+::-webkit-scrollbar{width:0; height:0;}
+</style>
+</head>
+<body>
+<div id="app">
+  <main id="view"></main>
+
+  <nav class="tabbar">
+    <button class="tab-btn" data-tab="dashboard"><span class="ic">🏠</span>首页</button>
+    <button class="tab-btn" data-tab="bills"><span class="ic">📒</span>账单</button>
+    <div class="tab-add"><button id="fabAdd">＋</button></div>
+    <button class="tab-btn" data-tab="savings"><span class="ic">💰</span>存款</button>
+    <button class="tab-btn" data-tab="profile"><span class="ic">👑</span>养成</button>
+  </nav>
+</div>
+
+<script>
+/* =========================================================
+   VC的首富养成记 —— 单文件 PWA
+   数据全部存储在浏览器 localStorage 中（仅本机可见，未接入云同步）
+   ========================================================= */
+
+const STORE_KEYS = {
+  categories:'vc_categories', transactions:'vc_transactions',
+  savingsAccounts:'vc_savings_accounts', savingsRecords:'vc_savings_records',
+  progress:'vc_progress'
+};
+
+function load(key, fallback){ try{ const v = localStorage.getItem(key); return v? JSON.parse(v): fallback; }catch(e){ return fallback; } }
+function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+function uid(){ return 'id_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+
+/* ---------------- 默认分类 ---------------- */
+function buildDefaultCategories(){
+  const mk = (name, icon, color, type, subs=[]) => {
+    const id = uid();
+    const parent = { id, name, icon, color, type, isCustom:false, hidden:false, parentId:null };
+    const children = subs.map(s => ({ id:uid(), name:s[0], icon:s[1], color, type, isCustom:false, hidden:false, parentId:id }));
+    return [parent, ...children];
+  };
+  return [
+    ...mk('餐饮','🍜','#FF8A5B','expense',[['早餐','☕'],['正餐','🍽️'],['外卖','🛵'],['奶茶咖啡','🧋'],['聚餐','👨‍👩‍👧']]),
+    ...mk('交通','🚗','#4E9DE0','expense',[['公交地铁','🚇'],['打车','🚕'],['加油','⛽'],['停车','🅿️'],['火车飞机','✈️']]),
+    ...mk('购物','🛍️','#B168E0','expense',[['服饰鞋包','👗'],['日用百货','🧴'],['数码电器','📱'],['美妆护肤','💄']]),
+    ...mk('娱乐','🎮','#E05C8A','expense',[['电影演出','🎬'],['游戏充值','🕹️'],['旅行','🧳'],['运动健身','🏃']]),
+    ...mk('居住','🏠','#6C7BE0','expense',[['房租房贷','🏘️'],['水电燃气','💡'],['物业','🏢'],['家居家装','🛋️']]),
+    ...mk('医疗','🏥','#3FC1C9','expense',[['看病买药','💊'],['体检','🩺'],['保险','🛡️']]),
+    ...mk('教育','📚','#5CB85C','expense',[['课程培训','🎓'],['书籍资料','📖']]),
+    ...mk('人情往来','🧧','#E0A83C','expense',[['红包礼金','🧧'],['请客送礼','🎁']]),
+    ...mk('其他支出','⚪️','#9AA0A6','expense',[]),
+    ...mk('工资','💼','#2FB380','income',[['基本工资','💼'],['奖金','🌟'],['提成','📈']]),
+    ...mk('副业兼职','💻','#2FA6B3','income',[]),
+    ...mk('投资理财','📊','#C79A2E','income',[['股票基金','📈'],['利息分红','💹']]),
+    ...mk('红包礼金','🧧','#D9534F','income',[]),
+    ...mk('其他收入','⚪️','#9AA0A6','income',[]),
+  ];
+}
+
+/* ---------------- 财富等级 & 成就 ---------------- */
+const WEALTH_LEVELS = [
+  {id:1,title:'月光族',icon:'🌙',th:0},
+  {id:2,title:'省钱新手',icon:'🙂',th:1000},
+  {id:3,title:'小有积蓄',icon:'👛',th:5000},
+  {id:4,title:'储蓄达人',icon:'💵',th:20000},
+  {id:5,title:'小富之家',icon:'🏠',th:50000},
+  {id:6,title:'投资新贵',icon:'📈',th:100000},
+  {id:7,title:'财务自由',icon:'🍃',th:300000},
+  {id:8,title:'商界精英',icon:'🏢',th:800000},
+  {id:9,title:'企业家',icon:'👑',th:2000000},
+  {id:10,title:'地区首富',icon:'👑',th:5000000},
+  {id:11,title:'VC的首富',icon:'✨',th:10000000},
+];
+function levelInfo(netWorth){
+  let cur = WEALTH_LEVELS[0];
+  for(const l of WEALTH_LEVELS){ if(netWorth >= l.th) cur = l; }
+  const idx = WEALTH_LEVELS.findIndex(l=>l.id===cur.id);
+  const next = WEALTH_LEVELS[idx+1] || null;
+  let ratio = 1;
+  if(next){
+    const span = next.th - cur.th;
+    ratio = span>0 ? Math.min(Math.max((netWorth-cur.th)/span,0),1) : 0;
+  }
+  return {cur, next, ratio};
+}
+const ACHIEVEMENTS = [
+  {id:'first_record', title:'初来乍到', icon:'🚩'},
+  {id:'streak_7', title:'自律一周', icon:'🔥'},
+  {id:'streak_30', title:'习惯养成', icon:'🔥'},
+  {id:'first_savings', title:'开源节流', icon:'💵'},
+  {id:'savings_10k', title:'小金库', icon:'🏦'},
+  {id:'positive_month', title:'月月有余', icon:'📈'},
+  {id:'level_5', title:'小富之家', icon:'🏠'},
+  {id:'level_9', title:'企业家精神', icon:'👑'},
+  {id:'ten_records', title:'记账新星', icon:'⭐'},
+];
+
+/* ---------------- 状态 ---------------- */
+let categories = load(STORE_KEYS.categories, null);
+if(!categories){ categories = buildDefaultCategories(); save(STORE_KEYS.categories, categories); }
+let transactions = load(STORE_KEYS.transactions, []);
+let savingsAccounts = load(STORE_KEYS.savingsAccounts, []);
+let savingsRecords = load(STORE_KEYS.savingsRecords, []);
+let progress = load(STORE_KEYS.progress, {unlocked:[], lastRecordDate:null, currentStreak:0, longestStreak:0});
+
+let currentTab = 'dashboard';
+let dashMonth = new Date();
+let billsMonth = new Date();
+let billsFilter = null;
+
+function persistAll(){
+  save(STORE_KEYS.categories, categories);
+  save(STORE_KEYS.transactions, transactions);
+  save(STORE_KEYS.savingsAccounts, savingsAccounts);
+  save(STORE_KEYS.savingsRecords, savingsRecords);
+  save(STORE_KEYS.progress, progress);
+}
+
+/* ---------------- 工具函数 ---------------- */
+function fmtMoney(v, showSign=false){
+  const n = Number(v)||0;
+  const sign = (showSign && n>0) ? '+' : (n<0? '-':'');
+  const abs = Math.abs(n).toLocaleString('zh-CN',{minimumFractionDigits:2, maximumFractionDigits:2});
+  return `¥${sign}${abs}`;
+}
+function sameMonth(dateStr, ref){
+  const d = new Date(dateStr);
+  return d.getFullYear()===ref.getFullYear() && d.getMonth()===ref.getMonth();
+}
+function monthTitle(d){ return `${d.getFullYear()}年${d.getMonth()+1}月`; }
+function dayTitle(d){
+  const wk = ['周日','周一','周二','周三','周四','周五','周六'][d.getDay()];
+  return `${d.getMonth()+1}月${d.getDate()}日 ${wk}`;
+}
+function topCategories(type){ return categories.filter(c=>!c.parentId && c.type===type && !c.hidden).sort((a,b)=>0); }
+function subCategories(parentId){ return categories.filter(c=>c.parentId===parentId); }
+
+function netWorth(){
+  const flow = transactions.reduce((s,t)=> s + (t.type==='income'? t.amount : -t.amount), 0);
+  const sv = savingsAccounts.reduce((s,a)=> s + accountBalance(a.id), 0);
+  return flow + sv;
+}
+function accountBalance(accId){
+  return savingsRecords.filter(r=>r.accountId===accId).reduce((s,r)=>s+r.amount,0);
+}
+function totalSavings(){ return savingsAccounts.reduce((s,a)=>s+accountBalance(a.id),0); }
+
+function registerStreak(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const last = progress.lastRecordDate ? new Date(progress.lastRecordDate) : null;
+  if(last){ last.setHours(0,0,0,0); }
+  if(last && last.getTime()===today.getTime()){ /* 今天已记过 */ }
+  else if(last && (today.getTime()-last.getTime())===86400000){ progress.currentStreak++; }
+  else { progress.currentStreak = 1; }
+  progress.longestStreak = Math.max(progress.longestStreak, progress.currentStreak);
+  progress.lastRecordDate = today.toISOString();
+}
+function evaluateAchievements(){
+  const set = new Set(progress.unlocked||[]);
+  if(transactions.length>0) set.add('first_record');
+  if(transactions.length>=10) set.add('ten_records');
+  if(progress.currentStreak>=7) set.add('streak_7');
+  if(progress.currentStreak>=30) set.add('streak_30');
+  if(savingsRecords.length>0) set.add('first_savings');
+  if(totalSavings()>=10000) set.add('savings_10k');
+  const now = new Date();
+  const mIncome = transactions.filter(t=>t.type==='income' && sameMonth(t.date, now)).reduce((s,t)=>s+t.amount,0);
+  const mExpense = transactions.filter(t=>t.type==='expense' && sameMonth(t.date, now)).reduce((s,t)=>s+t.amount,0);
+  if(mIncome>mExpense && mIncome>0) set.add('positive_month');
+  const nw = netWorth();
+  if(nw>=50000) set.add('level_5');
+  if(nw>=2000000) set.add('level_9');
+  progress.unlocked = Array.from(set);
+  return set;
+}
+
+/* ---------------- 渲染路由 ---------------- */
+function render(){
+  const view = document.getElementById('view');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===currentTab));
+  if(currentTab==='dashboard') view.innerHTML = renderDashboard();
+  if(currentTab==='bills') view.innerHTML = renderBills();
+  if(currentTab==='savings') view.innerHTML = renderSavings();
+  if(currentTab==='profile') view.innerHTML = renderProfile();
+  bindViewEvents();
+}
+
+/* ---------- 首页 ---------- */
+function renderDashboard(){
+  const monthTx = transactions.filter(t=>sameMonth(t.date, dashMonth));
+  const income = monthTx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+  const expense = monthTx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+  const balance = income-expense;
+  const info = levelInfo(netWorth());
+  const isCurrentMonth = sameMonth(new Date().toISOString(), dashMonth);
+
+  const byCat = {};
+  monthTx.filter(t=>t.type==='expense').forEach(t=>{
+    byCat[t.categoryName] = byCat[t.categoryName] || {amount:0, color:t.color};
+    byCat[t.categoryName].amount += t.amount;
+  });
+  const catList = Object.entries(byCat).sort((a,b)=>b[1].amount-a[1].amount).slice(0,6);
+  const maxCat = catList.length? catList[0][1].amount : 1;
+
+  const recent = monthTx.slice().sort((a,b)=> new Date(b.date)-new Date(a.date)).slice(0,6);
+
+  return `
+  <div class="header">
+    <div><h1>VC的首富养成记</h1><p>每一笔记账，都是通往首富的一步</p></div>
+  </div>
+
+  <div class="hero-card">
+    <div class="wealth-top">
+      <div><div class="wealth-title">当前称号</div><div class="wealth-name">${info.cur.icon} ${info.cur.title}</div></div>
+      <div><div class="wealth-title" style="text-align:right">净资产</div><div class="wealth-net num">${fmtMoney(netWorth())}</div></div>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:${info.ratio*100}%"></div></div>
+    <div class="wealth-hint">${info.next ? `距离「${info.next.title}」还差 ${fmtMoney(Math.max(info.next.th-netWorth(),0))}` : '恭喜，你已经是「VC的首富」！'}</div>
+  </div>
+
+  <div class="card">
+    <div class="month-switch">
+      <button data-act="dash-prev">‹</button>
+      <div class="m-title">${monthTitle(dashMonth)}</div>
+      <button data-act="dash-next" ${isCurrentMonth?'style="opacity:.25" disabled':''}>›</button>
+    </div>
+    <div class="summary-row">
+      <div class="summary-col"><div class="summary-label">收入</div><div class="summary-value num" style="color:var(--income)">${fmtMoney(income)}</div></div>
+      <div class="summary-col"><div class="summary-label">支出</div><div class="summary-value num" style="color:var(--expense)">${fmtMoney(expense)}</div></div>
+      <div class="summary-col"><div class="summary-label">结余</div><div class="summary-value num" style="color:${balance>=0?'var(--green-deep)':'var(--expense)'}">${fmtMoney(balance)}</div></div>
+    </div>
+  </div>
+
+  ${catList.length? `
+  <div class="card">
+    <div class="section-title">本月支出分类</div>
+    ${catList.map(([name,d])=>`
+      <div class="bar-row">
+        <div class="name">${name}</div>
+        <div class="track"><div class="fill" style="width:${(d.amount/maxCat*100)}%;background:${d.color}"></div></div>
+        <div class="amt num">${fmtMoney(d.amount)}</div>
+      </div>`).join('')}
+  </div>` : ''}
+
+  <div class="card">
+    <div class="section-title">最近记账</div>
+    ${recent.length? recent.map(txRowHtml).join('') : `<div class="empty-tip">本月还没有记账，点下方 ＋ 开始吧</div>`}
+  </div>
+  `;
+}
+
+function txRowHtml(t){
+  return `<div class="tx-row" data-tx="${t.id}">
+    <div class="tx-icon" style="background:${t.color}2e">${t.icon}</div>
+    <div class="tx-mid">
+      <div class="tx-name">${t.subName || t.categoryName}</div>
+      <div class="tx-note">${t.note || new Date(t.date).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}</div>
+    </div>
+    <div class="tx-amt num" style="color:${t.type==='income'?'var(--income)':'var(--text)'}">${t.type==='income'?'+':'-'}${Math.abs(t.amount).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+  </div>`;
+}
+
+/* ---------- 账单页 ---------- */
+function renderBills(){
+  let list = transactions.filter(t=>sameMonth(t.date, billsMonth));
+  if(billsFilter) list = list.filter(t=>t.categoryName===billsFilter);
+  list.sort((a,b)=> new Date(b.date)-new Date(a.date));
+
+  const groups = {};
+  list.forEach(t=>{
+    const key = new Date(t.date).toDateString();
+    groups[key] = groups[key] || [];
+    groups[key].push(t);
+  });
+  const allCatNames = Array.from(new Set(transactions.map(t=>t.categoryName)));
+
+  return `
+  <div class="header"><h1>账单</h1></div>
+  <div class="month-switch">
+    <button data-act="bills-prev">‹</button>
+    <div class="m-title">${monthTitle(billsMonth)}</div>
+    <button data-act="bills-next">›</button>
+  </div>
+  ${allCatNames.length? `
+  <div class="filter-scroll">
+    <button class="chip ${!billsFilter?'active':''}" data-filter="">全部</button>
+    ${allCatNames.map(n=>`<button class="chip ${billsFilter===n?'active':''}" data-filter="${n}">${n}</button>`).join('')}
+  </div>`:''}
+  ${Object.keys(groups).length===0? `<div class="empty-tip">这个月还没有账单</div>` :
+    Object.entries(groups).map(([dayKey, items])=>{
+      const d = new Date(dayKey);
+      const dIn = items.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+      const dOut = items.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+      return `<div class="day-group">
+        <div class="day-head">
+          <span>${dayTitle(d)}</span>
+          <span>${dIn>0?`<span class="in">收 ${fmtMoney(dIn)}</span>`:''}${dOut>0?`<span class="out">支 ${fmtMoney(dOut)}</span>`:''}</span>
+        </div>
+        <div class="card" style="padding:4px 14px;">${items.map(txRowHtml).join('')}</div>
+      </div>`;
+    }).join('')
+  }
+  `;
+}
+
+/* ---------- 存款页 ---------- */
+function renderSavings(){
+  return `
+  <div class="header"><h1>存款专区</h1><button data-act="add-account" style="background:none;border:none;color:var(--green-deep);font-size:22px;">＋</button></div>
+  <div class="hero-card">
+    <div class="wealth-title">存款总额</div>
+    <div style="font-size:30px;font-weight:800;margin:4px 0 6px" class="num">${fmtMoney(totalSavings())}</div>
+    <div class="wealth-hint">存款也会计入你的「净资产」，助你早日成为首富</div>
+  </div>
+  ${savingsAccounts.length===0? `<div class="empty-tip">还没有存款账户，点右上角 ＋ 新建一个吧</div>` :
+    savingsAccounts.map(a=>{
+      const bal = accountBalance(a.id);
+      const ratio = a.target? Math.min(Math.max(bal/a.target,0),1) : null;
+      return `<div class="account-row" data-account="${a.id}">
+        <div class="account-icon" style="background:${a.color}2e">${a.icon}</div>
+        <div class="account-mid">
+          <div class="account-name">${a.name}</div>
+          ${ratio!==null? `<div class="mini-progress"><div class="fill" style="width:${ratio*100}%;background:${a.color}"></div></div>`:''}
+        </div>
+        <div class="account-balance num">${fmtMoney(bal)}</div>
+        <div style="color:var(--text3)">›</div>
+      </div>`;
+    }).join('')
+  }
+  `;
+}
+
+/* ---------- 养成/我的 ---------- */
+function renderProfile(){
+  const info = levelInfo(netWorth());
+  const unlocked = evaluateAchievements();
+  persistAll();
+  return `
+  <div class="header"><h1>首富养成</h1></div>
+  <div class="card level-header">
+    <div class="ic">${info.cur.icon}</div>
+    <div class="name">${info.cur.title}</div>
+    <div class="muted">Lv.${info.cur.id} · 净资产 ${fmtMoney(netWorth())}</div>
+  </div>
+  <div class="card">
+    <div class="summary-row">
+      <div class="summary-col"><div class="summary-label">连续记账</div><div class="summary-value">${progress.currentStreak||0} 天</div></div>
+      <div class="summary-col"><div class="summary-label">历史最长</div><div class="summary-value" style="color:var(--green-deep)">${progress.longestStreak||0} 天</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="section-title">成就勋章墙</div>
+    <div class="badge-grid">
+      ${ACHIEVEMENTS.map(b=>{
+        const on = unlocked.has(b.id);
+        return `<div class="badge ${on?'unlocked':''}"><div class="badge-circle ${on?'unlocked':''}">${b.icon}</div><span>${b.title}</span></div>`;
+      }).join('')}
+    </div>
+  </div>
+  <div class="card" style="padding:4px 16px;">
+    <div class="settings-row" data-act="open-category-manage"><span>🗂️</span>分类管理<span class="arrow">›</span></div>
+    <div class="settings-row" data-act="open-install-guide"><span>📲</span>添加到主屏幕指南<span class="arrow">›</span></div>
+    <div class="settings-row" data-act="open-about"><span>ℹ️</span>关于自动记账的说明<span class="arrow">›</span></div>
+  </div>
+  `;
+}
+
+/* =========================================================
+   记账弹窗
+   ========================================================= */
+let recordState = { amount:'', type:'expense', topId:null, subId:null, note:'' };
+
+function openRecordModal(presetAmount='', presetType='expense'){
+  recordState = { amount:presetAmount, type:presetType, topId:null, subId:null, note:'' };
+  openSheet(renderRecordSheet());
+}
+function renderRecordSheet(){
+  const tops = topCategories(recordState.type);
+  const subs = recordState.topId ? subCategories(recordState.topId) : [];
+  const canSave = parseFloat(recordState.amount)>0 && recordState.topId;
+  return `
+  <div class="sheet-head">
+    <button data-act="close-sheet">取消</button>
+    <div class="title">记一笔</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="type-switch">
+    <button class="${recordState.type==='expense'?'active expense':''}" data-act="rec-type" data-v="expense">支出</button>
+    <button class="${recordState.type==='income'?'active income':''}" data-act="rec-type" data-v="income">收入</button>
+  </div>
+  <div class="amount-input">
+    <span>¥</span>
+    <input id="amountField" type="text" inputmode="decimal" placeholder="0.00" value="${recordState.amount}">
+  </div>
+  <div class="section-title">选择类别</div>
+  <div class="cat-grid">
+    ${tops.map(c=>`
+      <button class="cat-cell ${recordState.topId===c.id?'selected':''}" data-act="pick-top" data-id="${c.id}">
+        <div class="cat-circle" style="background:${recordState.topId===c.id?c.color:c.color+'26'}">${c.icon}</div>
+        <span>${c.name}</span>
+      </button>`).join('')}
+  </div>
+  ${subs.length? `
+  <div class="section-title" style="margin-top:16px">选择小类（可选）</div>
+  <div class="cat-grid">
+    ${subs.map(s=>`
+      <button class="cat-cell small ${recordState.subId===s.id?'selected':''}" data-act="pick-sub" data-id="${s.id}">
+        <div class="cat-circle" style="background:${recordState.subId===s.id?s.color:s.color+'26'}">${s.icon}</div>
+        <span>${s.name}</span>
+      </button>`).join('')}
+  </div>`:''}
+  <input class="note-input" id="noteField" placeholder="添加备注（可选）" value="${recordState.note}">
+  <button class="save-btn ${canSave?'ready':''}" id="saveTxBtn" ${canSave?'':'disabled'}>完成记账</button>
+  `;
+}
+function saveTransaction(){
+  const amount = parseFloat(recordState.amount);
+  const top = categories.find(c=>c.id===recordState.topId);
+  const sub = recordState.subId ? categories.find(c=>c.id===recordState.subId) : null;
+  if(!amount || amount<=0 || !top) return;
+  const tx = {
+    id:uid(), amount, type:recordState.type,
+    categoryId:top.id, categoryName:top.name,
+    subName: sub? sub.name: null, icon: sub? sub.icon: top.icon, color: top.color,
+    date:new Date().toISOString(), note:recordState.note||'', createdAt:new Date().toISOString()
+  };
+  transactions.push(tx);
+  registerStreak();
+  persistAll();
+  closeSheet();
+  render();
+}
+
+/* =========================================================
+   分类管理弹窗
+   ========================================================= */
+function openCategoryManage(type='expense'){
+  openSheet(renderCategoryManageSheet(type), true);
+}
+function renderCategoryManageSheet(type){
+  const tops = categories.filter(c=>!c.parentId && c.type===type);
+  return `
+  <div class="sheet-head">
+    <button data-act="close-sheet">关闭</button>
+    <div class="title">分类管理</div>
+    <button class="primary" data-act="add-top-category" data-type="${type}">新增大类</button>
+  </div>
+  <div class="type-switch">
+    <button class="${type==='expense'?'active expense':''}" data-act="manage-type" data-v="expense">支出</button>
+    <button class="${type==='income'?'active income':''}" data-act="manage-type" data-v="income">收入</button>
+  </div>
+  ${tops.map(top=>{
+    const subs = subCategories(top.id);
+    return `<div class="cat-manage-group">
+      <div class="cat-manage-title">
+        <span>${top.icon}</span><span>${top.name}</span>
+        ${top.isCustom? `<button data-act="del-cat" data-id="${top.id}" style="margin-left:auto;background:none;border:none;color:var(--expense);font-size:12px;">删除</button>`
+        : `<button data-act="hide-cat" data-id="${top.id}" style="margin-left:auto;background:none;border:none;color:var(--text3);font-size:12px;">${top.hidden?'取消隐藏':'隐藏'}</button>`}
+      </div>
+      <div class="cat-manage-subs">
+        ${subs.map(s=>`<div class="sub-chip"><span>${s.icon}</span><span>${s.name}</span>${s.isCustom?`<button data-act="del-cat" data-id="${s.id}">✕</button>`:''}</div>`).join('')}
+        <button class="sub-chip add-sub-chip" data-act="add-sub-category" data-parent="${top.id}" data-type="${type}">＋ 小类</button>
+      </div>
+    </div>`;
+  }).join('')}
+  `;
+}
+
+/* =========================================================
+   新增分类弹窗
+   ========================================================= */
+const ICON_OPTIONS = ['⭐','❤️','🎁','🛒','✈️','🐾','📷','🎵','🎨','🍀','🔥','💧','🌙','☀️','⚡','☕','👜','🚗','🏠','🎯'];
+const COLOR_OPTIONS = ['#F5C542','#FF8A5B','#4E9DE0','#B168E0','#E05C8A','#6C7BE0','#3FC1C9','#5CB85C','#E0A83C','#3DDC97'];
+let newCatState = {};
+function openAddCategory(type, parentId=null){
+  newCatState = { name:'', icon:ICON_OPTIONS[0], color:COLOR_OPTIONS[0], type, parentId };
+  openSheet(renderAddCategorySheet());
+}
+function renderAddCategorySheet(){
+  return `
+  <div class="sheet-head">
+    <button data-act="close-sheet">取消</button>
+    <div class="title">${newCatState.parentId? '新增小类':'新增大类'}</div>
+    <button class="primary" id="saveCatBtn">保存</button>
+  </div>
+  <div class="form-item"><label>名称</label><input id="catNameField" placeholder="${newCatState.parentId?'如：猫粮':'如：宠物'}" value="${newCatState.name}"></div>
+  <div class="form-item"><label>图标</label><div class="chip-row">
+    ${ICON_OPTIONS.map(ic=>`<button class="icon-opt ${newCatState.icon===ic?'active':''}" data-act="pick-icon" data-v="${ic}">${ic}</button>`).join('')}
+  </div></div>
+  <div class="form-item"><label>颜色</label><div class="chip-row">
+    ${COLOR_OPTIONS.map(c=>`<button class="swatch ${newCatState.color===c?'active':''}" style="background:${c}" data-act="pick-color" data-v="${c}"></button>`).join('')}
+  </div></div>
+  `;
+}
+function saveNewCategory(){
+  const name = document.getElementById('catNameField').value.trim();
+  if(!name) return;
+  categories.push({ id:uid(), name, icon:newCatState.icon, color:newCatState.color, type:newCatState.type, isCustom:true, hidden:false, parentId:newCatState.parentId });
+  persistAll();
+  closeSheet();
+  openCategoryManage(newCatState.type);
+}
+
+/* =========================================================
+   存款相关弹窗
+   ========================================================= */
+function openAddAccount(){
+  openSheet(`
+  <div class="sheet-head"><button data-act="close-sheet">取消</button><div class="title">新建存款账户</div><button class="primary" id="saveAccountBtn">创建</button></div>
+  <div class="form-item"><label>账户名称</label><input id="accNameField" placeholder="如：买房基金 / 应急备用金"></div>
+  <div class="form-item"><label>储蓄目标（可选）</label><input id="accTargetField" type="text" inputmode="decimal" placeholder="目标金额，如 50000"></div>
+  `);
+}
+function saveNewAccount(){
+  const name = document.getElementById('accNameField').value.trim();
+  if(!name) return;
+  const target = parseFloat(document.getElementById('accTargetField').value);
+  savingsAccounts.push({ id:uid(), name, icon:'🏦', color:'#3DDC97', target: target>0? target: null, createdAt:new Date().toISOString() });
+  persistAll();
+  closeSheet();
+  render();
+}
+
+function openAccountDetail(accId){
+  openSheet(renderAccountDetailSheet(accId), true);
+}
+function renderAccountDetailSheet(accId){
+  const acc = savingsAccounts.find(a=>a.id===accId);
+  if(!acc) return '';
+  const bal = accountBalance(accId);
+  const ratio = acc.target? Math.min(Math.max(bal/acc.target,0),1): null;
+  const records = savingsRecords.filter(r=>r.accountId===accId).sort((a,b)=>new Date(b.date)-new Date(a.date));
+  return `
+  <div class="sheet-head"><button data-act="close-sheet">关闭</button><div class="title">${acc.name}</div><div style="width:32px"></div></div>
+  <div class="card" style="text-align:center;">
+    <div class="muted">当前余额</div>
+    <div class="num" style="font-size:30px;font-weight:800;color:var(--green-deep);margin:6px 0">${fmtMoney(bal)}</div>
+    ${ratio!==null? `<div class="bar-track" style="background:rgba(34,51,42,.1)"><div class="bar-fill" style="width:${ratio*100}%;background:var(--green-deep)"></div></div><div class="muted" style="margin-top:6px">目标 ${fmtMoney(acc.target)} · 已完成 ${Math.round(ratio*100)}%</div>`:''}
+  </div>
+  <div style="display:flex;gap:10px;margin-bottom:14px;">
+    <button class="save-btn ready" style="margin:0;background:var(--income);color:var(--on-accent)" data-act="open-savings-record" data-acc="${accId}" data-deposit="1">存入</button>
+    <button class="save-btn" style="margin:0;color:var(--text)" data-act="open-savings-record" data-acc="${accId}" data-deposit="0">取出</button>
+  </div>
+  <div class="card">
+    <div class="section-title">存取明细</div>
+    ${records.length===0? `<div class="empty-tip">还没有存取记录</div>` :
+      records.map(r=>`<div class="tx-row">
+        <div class="tx-icon" style="background:${r.amount>=0?'#3DDC9726':'#FF6B6B26'}">${r.amount>=0?'⬇️':'⬆️'}</div>
+        <div class="tx-mid"><div class="tx-name">${r.note || (r.amount>=0?'存入':'取出')}</div><div class="tx-note">${dayTitle(new Date(r.date))}</div></div>
+        <div class="tx-amt num" style="color:${r.amount>=0?'var(--income)':'var(--expense)'}">${fmtMoney(r.amount, true)}</div>
+      </div>`).join('')
+    }
+  </div>
+  `;
+}
+let recordAccState = {};
+function openSavingsRecord(accId, isDeposit){
+  recordAccState = { accId, isDeposit };
+  openSheet(`
+  <div class="sheet-head"><button data-act="back-to-account">取消</button><div class="title">${isDeposit?'存入':'取出'}</div><button class="primary" id="saveRecordBtn">确认</button></div>
+  <div class="form-item"><label>${isDeposit?'存入':'取出'}金额</label><input id="recAmountField" type="text" inputmode="decimal" placeholder="0.00"></div>
+  <div class="form-item"><label>备注</label><input id="recNoteField" placeholder="可选"></div>
+  `);
+}
+function saveSavingsRecord(){
+  const amount = parseFloat(document.getElementById('recAmountField').value);
+  if(!amount || amount<=0) return;
+  const note = document.getElementById('recNoteField').value.trim();
+  savingsRecords.push({ id:uid(), accountId:recordAccState.accId, amount: recordAccState.isDeposit? amount : -amount, note, date:new Date().toISOString() });
+  persistAll();
+  openAccountDetail(recordAccState.accId);
+}
+
+/* =========================================================
+   说明弹窗
+   ========================================================= */
+function openInstallGuide(){
+  openSheet(`
+  <div class="sheet-head"><button data-act="close-sheet">关闭</button><div class="title">添加到主屏幕</div><div style="width:32px"></div></div>
+  <div class="guide-step"><div class="guide-num">1</div><div><b>用 Safari 浏览器打开本页面</b><p>注意必须是 Safari，微信/其他 App 内置浏览器不支持添加到主屏幕</p></div></div>
+  <div class="guide-step"><div class="guide-num">2</div><div><b>点击底部分享按钮</b><p>屏幕下方（或右上角）的方框加箭头图标 􀈂</p></div></div>
+  <div class="guide-step"><div class="guide-num">3</div><div><b>选择"添加到主屏幕"</b><p>下拉菜单里找到「添加到主屏幕」并点击</p></div></div>
+  <div class="guide-step"><div class="guide-num">4</div><div><b>完成</b><p>桌面上会出现「首富养成记」图标，之后点它打开就是全屏无浏览器地址栏的 App 体验，数据仍保存在本机</p></div></div>
+  `);
+}
+function openAbout(){
+  openSheet(`
+  <div class="sheet-head"><button data-act="close-sheet">关闭</button><div class="title">关于自动记账</div><div style="width:32px"></div></div>
+  <div class="guide-step"><div class="guide-num">ⓘ</div><div><b>为什么不能自动识别支付宝/微信通知？</b><p>iOS 系统不允许网页/第三方 App 读取其他 App 的通知内容，这是苹果的隐私限制。目前记账需要你手动点击下方 ＋ 号，选择分类即可快速完成。</p></div></div>
+  <div class="guide-step"><div class="guide-num">☁️</div><div><b>数据会同步到其他设备吗？</b><p>当前版本数据只保存在这台设备的浏览器本地（localStorage），换设备或清除浏览器数据会丢失，暂不支持多设备同步。</p></div></div>
+  `);
+}
+
+/* =========================================================
+   通用 Sheet 控制
+   ========================================================= */
+let sheetStack = [];
+function openSheet(html, isCategoryManageContext){
+  const mask = document.createElement('div');
+  mask.className = 'sheet-mask';
+  mask.innerHTML = `<div class="sheet">${html}</div>`;
+  mask.addEventListener('click', (e)=>{ if(e.target===mask) closeSheet(); });
+  document.body.appendChild(mask);
+  sheetStack.push(mask);
+  bindSheetEvents(mask);
+}
+function closeSheet(){
+  const mask = sheetStack.pop();
+  if(mask) mask.remove();
+}
+function refreshTopSheet(html){
+  if(sheetStack.length===0) return;
+  const mask = sheetStack[sheetStack.length-1];
+  mask.querySelector('.sheet').innerHTML = html;
+  bindSheetEvents(mask);
+}
+
+function bindSheetEvents(mask){
+  mask.querySelectorAll('[data-act]').forEach(el=>{
+    el.addEventListener('click', onSheetAction);
+  });
+  const amountField = mask.querySelector('#amountField');
+  if(amountField) amountField.addEventListener('input', e=>{ recordState.amount = e.target.value; syncSaveBtn(); });
+  const noteField = mask.querySelector('#noteField');
+  if(noteField) noteField.addEventListener('input', e=>{ recordState.note = e.target.value; });
+  const saveTxBtn = mask.querySelector('#saveTxBtn');
+  if(saveTxBtn) saveTxBtn.addEventListener('click', saveTransaction);
+  const saveCatBtn = mask.querySelector('#saveCatBtn');
+  if(saveCatBtn) saveCatBtn.addEventListener('click', saveNewCategory);
+  const saveAccountBtn = mask.querySelector('#saveAccountBtn');
+  if(saveAccountBtn) saveAccountBtn.addEventListener('click', saveNewAccount);
+  const saveRecordBtn = mask.querySelector('#saveRecordBtn');
+  if(saveRecordBtn) saveRecordBtn.addEventListener('click', saveSavingsRecord);
+}
+function syncSaveBtn(){
+  const btn = document.querySelector('#saveTxBtn');
+  if(!btn) return;
+  const ok = parseFloat(recordState.amount)>0 && recordState.topId;
+  btn.classList.toggle('ready', !!ok);
+  btn.disabled = !ok;
+}
+
+function onSheetAction(e){
+  const el = e.currentTarget;
+  const act = el.dataset.act;
+  if(act==='close-sheet') return closeSheet();
+  if(act==='rec-type'){ recordState.type = el.dataset.v; recordState.topId=null; recordState.subId=null; refreshTopSheet(renderRecordSheet()); }
+  if(act==='pick-top'){ recordState.topId = el.dataset.id; recordState.subId=null; refreshTopSheet(renderRecordSheet()); }
+  if(act==='pick-sub'){ recordState.subId = (recordState.subId===el.dataset.id)? null : el.dataset.id; refreshTopSheet(renderRecordSheet()); }
+  if(act==='manage-type'){ refreshTopSheet(renderCategoryManageSheet(el.dataset.v)); }
+  if(act==='add-top-category'){ openAddCategory(el.dataset.type, null); }
+  if(act==='add-sub-category'){ openAddCategory(el.dataset.type, el.dataset.parent); }
+  if(act==='pick-icon'){ newCatState.icon = el.dataset.v; refreshTopSheet(renderAddCategorySheet()); }
+  if(act==='pick-color'){ newCatState.color = el.dataset.v; refreshTopSheet(renderAddCategorySheet()); }
+  if(act==='hide-cat'){ const c=categories.find(x=>x.id===el.dataset.id); c.hidden=!c.hidden; persistAll(); refreshTopSheet(renderCategoryManageSheet(c.type)); }
+  if(act==='del-cat'){ const c=categories.find(x=>x.id===el.dataset.id); categories=categories.filter(x=>x.id!==el.dataset.id && x.parentId!==el.dataset.id); persistAll(); refreshTopSheet(renderCategoryManageSheet(c.type)); }
+  if(act==='open-savings-record'){ openSavingsRecord(el.dataset.acc, el.dataset.deposit==='1'); }
+  if(act==='back-to-account'){ openAccountDetail(recordAccState.accId); }
+}
+
+/* =========================================================
+   页面级事件绑定
+   ========================================================= */
+function bindViewEvents(){
+  document.querySelectorAll('[data-act="dash-prev"]').forEach(b=>b.onclick=()=>{ dashMonth.setMonth(dashMonth.getMonth()-1); render(); });
+  document.querySelectorAll('[data-act="dash-next"]').forEach(b=>b.onclick=()=>{ dashMonth.setMonth(dashMonth.getMonth()+1); render(); });
+  document.querySelectorAll('[data-act="bills-prev"]').forEach(b=>b.onclick=()=>{ billsMonth.setMonth(billsMonth.getMonth()-1); render(); });
+  document.querySelectorAll('[data-act="bills-next"]').forEach(b=>b.onclick=()=>{ billsMonth.setMonth(billsMonth.getMonth()+1); render(); });
+  document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{ billsFilter = b.dataset.filter || null; render(); });
+  document.querySelectorAll('.tx-row').forEach(row=>{
+    row.onclick = ()=>{
+      const id = row.dataset.tx;
+      if(confirm('删除这条记账记录？')){
+        transactions = transactions.filter(t=>t.id!==id);
+        persistAll(); render();
+      }
+    };
+  });
+  const addAccBtn = document.querySelector('[data-act="add-account"]');
+  if(addAccBtn) addAccBtn.onclick = openAddAccount;
+  document.querySelectorAll('[data-account]').forEach(row=>{ row.onclick = ()=>openAccountDetail(row.dataset.account); });
+  const catManageBtn = document.querySelector('[data-act="open-category-manage"]');
+  if(catManageBtn) catManageBtn.onclick = ()=>openCategoryManage('expense');
+  const guideBtn = document.querySelector('[data-act="open-install-guide"]');
+  if(guideBtn) guideBtn.onclick = openInstallGuide;
+  const aboutBtn = document.querySelector('[data-act="open-about"]');
+  if(aboutBtn) aboutBtn.onclick = openAbout;
+}
+
+/* ---------------- Tab / FAB ---------------- */
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{ currentTab = b.dataset.tab; render(); });
+});
+document.getElementById('fabAdd').addEventListener('click', ()=> openRecordModal());
+
+render();
+</script>
+</body>
+</html>
